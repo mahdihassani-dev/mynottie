@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/mcardview"
+    android:backgroundTint="@color/dark_gray"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/txt_title_recycle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="this is my first note"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/txt_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="4dp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/txt_detail_recycle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="and this is important to know that everything is in the control of our dear god and he know how to handle things"
+            app:layout_constraintEnd_toEndOf="@+id/txt_title_recycle"
+            app:layout_constraintStart_toStartOf="@+id/txt_title_recycle"
+            app:layout_constraintTop_toBottomOf="@+id/txt_title_recycle"
+            android:textColor="#FFEBEE"
+            android:padding="8dp"
+            android:layout_marginTop="4dp"
+            android:maxEms="8"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingStart="8dp" />
+
+        <TextView
+            android:id="@+id/txt_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="14/april/2022"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_time"
+            android:textColor="@color/gray_100"/>
+
+        <TextView
+            android:id="@+id/txt_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:45"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/txt_date"
+            app:layout_constraintStart_toStartOf="@+id/txt_date"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            android:textColor="@color/gray_100"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>

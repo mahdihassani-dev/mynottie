@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My_Note</string>
+    <string name="title">Title</string>
+    <string name="_30">30</string>
+    <string name="type_something">Type something ...</string>
+    <string name="notes">Notes</string>
+    <string name="create_your_first_note">Create your first note !</string>
+</resources>
