@@ -1,11 +1,11 @@
-package com.example.my_note.Adapters
+package com.example.my_note.view
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.my_note.databinding.NoteItemBinding
-import com.example.my_note.room.NoteData
+import com.example.my_note.model.NoteData
 import java.util.*
 
 class NoteAdapter(private val mList: ArrayList<NoteData>) :

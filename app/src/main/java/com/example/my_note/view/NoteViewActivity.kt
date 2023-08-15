@@ -1,4 +1,4 @@
-package com.example.my_note.ui
+package com.example.my_note.view
 
 import android.app.Activity
 import android.content.Intent
@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.my_note.databinding.ActivityNoteViewBinding
-import com.example.my_note.room.Dao
-import com.example.my_note.room.NoteData
-import com.example.my_note.room.NoteDataBase
+import com.example.my_note.model.Dao
+import com.example.my_note.model.NoteData
+import com.example.my_note.model.NoteDataBase
 import java.text.SimpleDateFormat
 import java.util.*
 

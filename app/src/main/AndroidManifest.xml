@@ -13,13 +13,13 @@
         tools:replace="android:icon"
         tools:targetApi="31">
         <activity
-            android:name=".NoteViewActivity"
+            android:name=".view.NoteViewActivity"
             android:exported="false" />
         <activity
-            android:name=".EditorActivity"
-            android:exported="true"></activity>
+            android:name=".view.EditorActivity"
+            android:exported="false"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

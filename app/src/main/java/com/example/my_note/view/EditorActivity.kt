@@ -1,4 +1,4 @@
-package com.example.my_note.ui
+package com.example.my_note.view
 
 import android.app.Activity
 import android.app.AlertDialog

@@ -1,4 +1,4 @@
-package com.example.my_note.ui
+package com.example.my_note.view
 
 import android.app.Activity
 import android.app.AlertDialog
@@ -14,11 +14,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.my_note.Adapters.NoteAdapter
 import com.example.my_note.databinding.ActivityMainBinding
-import com.example.my_note.room.Dao
-import com.example.my_note.room.NoteData
-import com.example.my_note.room.NoteDataBase
+import com.example.my_note.model.Dao
+import com.example.my_note.model.NoteData
+import com.example.my_note.model.NoteDataBase
 import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 import java.util.*
@@ -35,8 +34,8 @@ const val idForUpdate = "TheId"
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    lateinit var adapter: NoteAdapter
-    lateinit var noteDao: Dao
+    private lateinit var adapter: NoteAdapter
+    private lateinit var noteDao: Dao
     private var isKeyboardOpen = false
 
     private var resultLauncher =
@@ -188,7 +187,7 @@ class MainActivity : AppCompatActivity() {
             .setMessage("do you want to delete the note")
             .setPositiveButton(
                 "yes"
-            ) { dialog, which ->
+            ) { _, _ ->
 
                 Log.i(TAG, it.id.toString())
                 Log.i(TAG, it.details)
