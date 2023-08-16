@@ -9,12 +9,14 @@ import com.example.my_note.databinding.ActivityNoteViewBinding
 import com.example.my_note.model.Dao
 import com.example.my_note.model.NoteData
 import com.example.my_note.model.NoteDataBase
+import com.example.my_note.util.DetailForUpdate
+import com.example.my_note.util.TitleForUpdate
+import com.example.my_note.util.idForUpdate
+import com.example.my_note.util.positionForUpdate
 import java.text.SimpleDateFormat
 import java.util.*
 
 private const val TAG = "NoteViewActivityTest"
-const val TitleForUpdate = "TheOldTitle"
-const val DetailForUpdate = "TheOldDetail"
 
 
 class NoteViewActivity : AppCompatActivity() {

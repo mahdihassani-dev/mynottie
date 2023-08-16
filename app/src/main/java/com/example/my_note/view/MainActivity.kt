@@ -18,6 +18,11 @@ import com.example.my_note.databinding.ActivityMainBinding
 import com.example.my_note.model.Dao
 import com.example.my_note.model.NoteData
 import com.example.my_note.model.NoteDataBase
+import com.example.my_note.presenter.MainPresenter
+import com.example.my_note.util.DETAIL_KEY
+import com.example.my_note.util.TITLE_KEY
+import com.example.my_note.util.idForUpdate
+import com.example.my_note.util.positionForUpdate
 import com.google.android.material.textfield.TextInputEditText
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,16 +31,12 @@ import kotlin.collections.ArrayList
 
 private const val TAG = "MyMainActivity"
 
-const val DETAIL_KEY = "detailView"
-const val TITLE_KEY = "titleView"
-const val positionForUpdate = "ThePosition"
-const val idForUpdate = "TheId"
-
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainScreenContract.View {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var adapter: NoteAdapter
+    private lateinit var mainAdapter: NoteAdapter
     private lateinit var noteDao: Dao
+    private lateinit var presenter : MainScreenContract.Presenter
     private var isKeyboardOpen = false
 
     private var resultLauncher =
@@ -53,20 +54,21 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         noteDao = NoteDataBase.getDatabase(this).noteDao
+        presenter = MainPresenter(noteDao)
+        presenter.onAttach(this)
 
         insertEvent()
         searchProcess()
         handleOnBackPressed()
-
-
+        handleAdapterEvents()
 
     }
 
     override fun onResume() {
         super.onResume()
-        setupDatabase()
-    }
+        presenter.onRefresh()
 
+    }
     private fun handleOnBackPressed() {
         onBackPressedDispatcher.addCallback(this /* lifecycle owner */, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
@@ -91,41 +93,21 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
-
-    private fun setupDatabase() {
-
-        handleVisibility()
-
-        val noteData = noteDao.getAllNote()
-
-        binding.noteRecyclerview.layoutManager = LinearLayoutManager(this)
-        binding.noteRecyclerview.isNestedScrollingEnabled = false
-        adapter = NoteAdapter(ArrayList(noteData.reversed()))
-        binding.noteRecyclerview.adapter = adapter
-
-        handleAdapterEvents()
-
-    }
-
     private fun insertEvent() {
         binding.addNoteBtn.setOnClickListener {
-
             openEditorActivityForInsertResult()
-
         }
 
     }
-
     private fun openEditorActivityForInsertResult() {
 
         val intent = Intent(this, EditorActivity::class.java)
         resultLauncher.launch(intent)
 
     }
-
     private fun handleAdapterEvents() {
 
-        adapter.onItemClick = { it: NoteData, i: Int ->
+        mainAdapter.onItemClick = { it: NoteData, i: Int ->
 
             val intent = Intent(this, NoteViewActivity::class.java)
             intent.putExtra(TITLE_KEY, it.title)
@@ -139,13 +121,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-        adapter.onLongItemClick = { noteData: NoteData, i: Int ->
+        mainAdapter.onLongItemClick = { noteData: NoteData, i: Int ->
 
-            deleteNote(noteData, i)
+            deleteEvent(noteData, i)
         }
 
     }
-
     private fun fillDataAfterAddingNote(result: ActivityResult) {
 
         val data: Intent? = result.data
@@ -168,19 +149,12 @@ class MainActivity : AppCompatActivity() {
             time = timeFormat,
         )
 
-        addNewNote(newItem)
-
-    }
-
-    private fun addNewNote(noteData: NoteData) {
-
-        adapter.addNewItem(noteData)
+        presenter.onAddNewNoteClicked(newItem)
         binding.noteRecyclerview.smoothScrollToPosition(0)
-        noteDao.insertNote(noteData)
-        setupDatabase()
-    }
 
-    private fun deleteNote(it: NoteData, position: Int) {
+
+    }
+    private fun deleteEvent(it: NoteData, position: Int) {
 
         val mAlert = AlertDialog.Builder(this)
             .setTitle("Delete")
@@ -189,14 +163,9 @@ class MainActivity : AppCompatActivity() {
                 "yes"
             ) { _, _ ->
 
-                Log.i(TAG, it.id.toString())
-                Log.i(TAG, it.details)
 
-                adapter.deleteItem(it, position)
-                noteDao.deleteNote(it)
+                presenter.onDeleteNote(it, position)
                 handleVisibility()
-
-                setupDatabase()
 
             }
             .setNegativeButton("no", null)
@@ -243,25 +212,9 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
     private fun searchOnDatabase(it: String) {
-
-
-        if(it.isNotEmpty()){
-
-            val filteredNotes = noteDao.searchNote(it)
-            adapter.setData( ArrayList(filteredNotes) )
-
-        }else{
-
-            val allData = noteDao.getAllNote()
-            adapter.setData( ArrayList(allData) )
-
-        }
-
-
+        presenter.onSearchNote(it)
     }
-
     private fun handleVisibility() {
 
         if (noteDao.getAllNote().isEmpty()) {
@@ -280,17 +233,45 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
     private fun Context.hideKeyboard(view: View) {
         val inputMethodManager =
             getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
     private fun showKeyboard(mEtSearch: TextInputEditText) {
         mEtSearch.requestFocus()
         val imm = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(mEtSearch, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+    override fun showNotes(data: List<NoteData>) {
+
+        mainAdapter = NoteAdapter(ArrayList(data.reversed()))
+        binding.noteRecyclerview.adapter = mainAdapter
+        binding.noteRecyclerview.layoutManager = LinearLayoutManager(this)
+        handleVisibility()
+    }
+
+    override fun refreshNotes(data: List<NoteData>) {
+        mainAdapter.setData(ArrayList(data))
+    }
+
+    override fun addNewNote(newNote: NoteData) {
+        mainAdapter.addNewItem(newNote)
+    }
+
+    override fun deleteNote(oldNote: NoteData, pos: Int) {
+        mainAdapter.deleteItem(oldNote, pos)
+
+    }
+
+    override fun updateNote(editedNote: NoteData, pos: Int) {
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.onDetach()
     }
 
 }

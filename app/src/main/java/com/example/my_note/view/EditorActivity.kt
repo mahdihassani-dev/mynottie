@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import com.example.my_note.databinding.ActivityEditorBinding
+import com.example.my_note.util.DetailForUpdate
+import com.example.my_note.util.TitleForUpdate
 
 const val TitleContent = "titleContent"
 const val DetailContent = "detailContent"
