@@ -13,6 +13,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.my_note.databinding.ActivityMainBinding
 import com.example.my_note.model.Dao
@@ -42,8 +43,8 @@ class MainActivity : AppCompatActivity(), MainScreenContract.View {
     private var resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                handleVisibility()
                 fillDataAfterAddingNote(result)
+                handleVisibility()
             }
         }
 
@@ -151,7 +152,6 @@ class MainActivity : AppCompatActivity(), MainScreenContract.View {
 
         presenter.onAddNewNoteClicked(newItem)
         binding.noteRecyclerview.smoothScrollToPosition(0)
-
 
     }
     private fun deleteEvent(it: NoteData, position: Int) {
