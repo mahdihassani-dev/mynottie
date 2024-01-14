@@ -1,14 +1,4 @@
-<!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 <a name="readme-top"></a>
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
-
 
 <!-- PROJECT SHIELDS -->
 <!--
@@ -61,10 +51,22 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-this is my first android project, a note app with material design and mvp architecture.
+this is my first android project, a note app by which i learned some basic skills in android developing like
+working with database, design layouts in xml with material design system and mvp architecture 
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- Technologies I used -->
+## Technologies I used
+#### Material Design System:
+[![Product Name Screen Shot][materialDesign-pic]](https://m3.material.io/)
+<br />
+a popular desigin system which give you a pleasant and simple design with beautiful components 
+
+#### Room database:
+[![Product Name Screen Shot][roomDatabase-pic]](https://m3.material.io/)
+
 
 <!-- CONTACT -->
 ## Contact
@@ -81,3 +83,5 @@ Project Link: [https://github.com/mahdihassani-dev/SimpleNoteApp](https://github
 [license-url]: https://github.com/mahdihassani-dev/SimpleNoteApp/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/mahdi-hassani-939602255/
+[materialDesign-pic]: images/materialDesign.png
+[roomDatabase-pic]: images/room_architecture.png
