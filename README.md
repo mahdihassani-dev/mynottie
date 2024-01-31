@@ -57,6 +57,24 @@ working with database, design layouts in xml with material design system and mvp
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+<h3 align="center">Screenshots :camera:</h3>
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center">
+        <img width="100%" src="images/screen1.jpg" alt="screenshot 1">
+      </td>
+      <td align="center">
+        <img width="100%" src="images/screen2.jpg" alt="screenshot 2">
+      </td>
+      <td align="center">
+        <img width="100%" src="images/screen3.jpg" alt="screenshot 3">
+      </td>
+    </tr>
+  </table>
+</div>
+
 <!-- Technologies I used -->
 ## Technologies I used
 #### Material Design System:
