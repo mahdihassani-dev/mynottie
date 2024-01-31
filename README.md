@@ -62,11 +62,18 @@ working with database, design layouts in xml with material design system and mvp
 #### Material Design System:
 [![Product Name Screen Shot][materialDesign-pic]](https://m3.material.io/)
 <br />
-a popular desigin system which give you a pleasant and simple design with beautiful components 
-
+a popular desigin system which give you a pleasant and simple design with beautiful components. 
+<br />
 #### Room database:
-[![Product Name Screen Shot][roomDatabase-pic]](https://m3.material.io/)
-
+[![Product Name Screen Shot][roomDatabase-pic]](https://developer.android.com/training/data-storage/room)
+<br />
+The Room persistence library provides an abstraction layer over SQLite to allow fluent database access while harnessing the full power of SQLite
+<br />
+#### MVP Architecture:
+[![Product Name Screen Shot][mvp-pic]](https://www.geeksforgeeks.org/mvp-model-view-presenter-architecture-pattern-in-android-with-example/)
+<br />
+model-presenter-view architecture as you see in the picture.in this project i got one presenter called mainPresenter which override interfaces in mainScreenContrct
+to make connection between view and model layer.
 
 <!-- CONTACT -->
 ## Contact
@@ -85,3 +92,4 @@ Project Link: [https://github.com/mahdihassani-dev/SimpleNoteApp](https://github
 [linkedin-url]: https://www.linkedin.com/in/mahdi-hassani-939602255/
 [materialDesign-pic]: images/materialDesign.png
 [roomDatabase-pic]: images/room_architecture.png
+[mvp-pic]: images/MVPSchema.png
